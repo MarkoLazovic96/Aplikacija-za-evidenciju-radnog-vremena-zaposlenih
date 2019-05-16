@@ -1,0 +1,18 @@
+<?php
+    class DatabaseConnection{
+        private $connection;
+        private $configuration;
+
+        public function __construct(DatabaseConfiguration $databaseConfiguration){
+            $this->configuration = $databaseConfiguration;
+        }
+
+        public function getConnection(): PDO {
+            if($this->connection === NULL){
+                $this->connection = new PDO($this->configuration->getSourceString(),
+                                            $this->configuration->getSourceString(),
+                                            $this->configuration->getSourceString());
+            }
+            return $this->connection;
+        }
+    }
