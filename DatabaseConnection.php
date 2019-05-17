@@ -10,8 +10,8 @@
         public function getConnection(): PDO {
             if($this->connection === NULL){
                 $this->connection = new PDO($this->configuration->getSourceString(),
-                                            $this->configuration->getSourceString(),
-                                            $this->configuration->getSourceString());
+                                            $this->configuration->getUser(),
+                                            $this->configuration->getPass());
             }
             return $this->connection;
         }
