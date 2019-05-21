@@ -4,8 +4,11 @@ require_once('vendor/autoload.php');
 $databaseConfiguration = new App\Core\DatabaseConfiguration('localhost','root','','evidencija');
 $databaseConnection = new App\Core\DatabaseConnection($databaseConfiguration);
 
-$zaposleniModel = new App\Models\ZaposleniModel($databaseConnection);
+$controller = new \App\Controllers\MainController($databaseConnectionata);
+$data = $controller->home();
 
-$zaposleni = $zaposleniModel->getByID(11);
+foreach ($data as $ime => $value) {
 
-print_r($zaposleni);
+    $$name = $value;
+
+}
