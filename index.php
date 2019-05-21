@@ -1,12 +1,10 @@
 <?php
-require_once('DatabaseConfiguration.php');
-require_once('DatabaseConnection.php');
-require_once('models/ZaposleniModel.php');
+require_once('vendor/autoload.php');
 
-$databaseConfiguration = new DatabaseConfiguration('localhost','root','','evidencija');
-$databaseConnection = new DatabaseConnection($databaseConfiguration);
+$databaseConfiguration = new App\Core\DatabaseConfiguration('localhost','root','','evidencija');
+$databaseConnection = new App\Core\DatabaseConnection($databaseConfiguration);
 
-$zaposleniModel = new ZaposleniModel($databaseConnection);
+$zaposleniModel = new App\Models\ZaposleniModel($databaseConnection);
 
 $zaposleni = $zaposleniModel->getByID(11);
 

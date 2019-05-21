@@ -1,4 +1,5 @@
 <?php
+namespace App\Core;
     class DatabaseConfiguration {
         private $host;
         private $user;

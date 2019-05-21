@@ -1,4 +1,7 @@
 <?php
+namespace App\Models;
+
+use App\Core\DatabaseConnection;
     class ZaposleniModel{
         private $dbc;
 
@@ -12,7 +15,7 @@
             $res=$prep->execute([$zaposleniID]);
             $zaposleni = NULL;
             if($res){
-                $zaposleni = $prep->fetch(PDO::FETCH_OBJ);
+                $zaposleni = $prep->fetch(\PDO::FETCH_OBJ);
             }
             return $zaposleni;                                          
         }
