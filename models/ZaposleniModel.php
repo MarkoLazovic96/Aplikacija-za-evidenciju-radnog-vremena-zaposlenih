@@ -19,4 +19,14 @@ use App\Core\DatabaseConnection;
             }
             return $zaposleni;                                          
         }
+        public function getAll(){
+            $sql = 'SELECT * FROM zaposleni';
+            $prep = $this->dbc->getConnection()->prepare($sql);
+            $res=$prep->execute([$zaposleniID]);
+            $zaposleni = NULL;
+            if($res){
+                $zaposleni = $prep->fetch(\PDO::FETCH_OBJ);
+            }
+            return $zaposleni;                                          
+        }
 }
