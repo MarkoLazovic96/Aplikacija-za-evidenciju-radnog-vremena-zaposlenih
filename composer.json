@@ -1,0 +1,16 @@
+{
+    "name": "praktikum/project-app",
+    "type": "project",
+    "authors": [
+        {
+            "name": "MarkoLazovic15",
+            "email": "marko.lazovic.15@singimail.rs"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\" : ""
+        }
+    }
+}
