@@ -1,21 +1,12 @@
 <?php
 
-namespace App\Contollers;
-
-class MainController {
-    private $dbc;
-
-    public function __constuct(\App\Core\DatabaseConnection &$dbc){ 
-        $this->dbc = $dbc;
-    }
-    
+namespace App\Controllers;
+class MainController extends \App\Core\Controller {
     public function home() {
-        $ZaposleniModel = new \App\Models\ZaposleniModel(this->dbc);
-        $Zaposleni = $ZaposleniModel->getByID(11); 
-        
+        $zaposleniModel = new \App\Models\ZaposleniModel($this->getDatabaseConnection());
+        $zaposleniList = $zaposleniModel->getAll(); 
 
-        return 
-            'Zaposleni' => $Zaposleni
-    ];
+        $this->set('zaposleniList',$zaposleniList);
+
     }
 }

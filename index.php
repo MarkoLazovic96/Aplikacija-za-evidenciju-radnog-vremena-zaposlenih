@@ -1,21 +1,39 @@
 <?php
-require_once('vendor/autoload.php');
+require_once 'Configuration.php';
+require_once 'vendor/autoload.php';
 
-$databaseConfiguration = new App\Core\DatabaseConfiguration('localhost','root','','evidencija');
-$databaseConnection = new App\Core\DatabaseConnection($databaseConfiguration);
+$databaseConfiguration = new App\Core\DatabaseConfiguration(
+    Configuration::DATABASE_HOST,
+    Configuration::DATABASE_USER,
+    Configuration::DATABASE_PASS,   
+    Configuration::DATABASE_NAME
+);
+$databaseConnectionata = new App\Core\DatabaseConnection($databaseConfiguration);
 
-<<<<<<< HEAD
-$url = filter_input(INPUT_GET,'URL');
-die($url);
+$url= strval(filter_input(INPUT_GET,'URL'));
+$httpMethod = filter_input(INPUT_SERVER,'REQUEST_METHOD');
 
-$zaposleniModel = new App\Models\ZaposleniModel($databaseConnection);
-=======
-$controller = new \App\Controllers\MainController($databaseConnectionata);
-$data = $controller->home();
->>>>>>> 76007b890b79e1d25cd7bdfbda10ac6ce6cd1a01
+$router = new App\Core\Router();
+$routes = require_once 'Routes.php';
+
+foreach ($routes as $route){
+    $router->add($route);
+}
+
+$route = $router->find($httpMethod, $url);
+$arguments = $route->exstractArguments($url);
+print_r($route);
+print_r($arguments);
+
+$fullContollerName = '\\App\\Controllers\\' . $route->getControllerName() . 'Contoller';
+$controller = new App\Controllers\MainController($databaseConnectionata);
+call_user_func_array([$controller,$route->getMethodName()], $arguments);
+
+$data = $controller->getData();
 
 foreach ($data as $ime => $value) {
 
-    $$name = $value;
+    $$ime = $value;
 
 }
+require_once 'views/'. $route->getControllerName() .'/'.$route->getMethodName().'.php';

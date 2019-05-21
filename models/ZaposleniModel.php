@@ -20,13 +20,13 @@ use App\Core\DatabaseConnection;
             return $zaposleni;                                          
         }
         public function getAll(){
-            $sql = 'SELECT * FROM zaposleni';
+            $sql = 'SELECT * FROM zaposleni;';
             $prep = $this->dbc->getConnection()->prepare($sql);
-            $res=$prep->execute([$zaposleniID]);
-            $zaposleni = NULL;
+            $res=$prep->execute();
+            $zaposleniList = [];
             if($res){
-                $zaposleni = $prep->fetch(\PDO::FETCH_OBJ);
+                $zaposleniList = $prep->fetchAll(\PDO::FETCH_OBJ);
             }
-            return $zaposleni;                                          
+            return $zaposleniList;                                          
         }
 }
