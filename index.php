@@ -22,8 +22,8 @@ foreach ($routes as $route){
 
 $route = $router->find($httpMethod, $url);
 $arguments = $route->exstractArguments($url);
-print_r($route);
-print_r($arguments);
+#print_r($route);
+#print_r($arguments);
 
 $fullContollerName = '\\App\\Controllers\\' . $route->getControllerName() . 'Contoller';
 $controller = new App\Controllers\MainController($databaseConnectionata);
@@ -31,9 +31,10 @@ call_user_func_array([$controller,$route->getMethodName()], $arguments);
 
 $data = $controller->getData();
 
-foreach ($data as $ime => $value) {
-
-    $$ime = $value;
-
-}
-require_once 'views/'. $route->getControllerName() .'/'.$route->getMethodName().'.php';
+$loader = new Twig_Loader_Filesystem("./views");
+$twig = new Twig_Environment($loader,[
+"cache" => "./twig-cache",
+"auto_reload" => true
+]);
+echo $twig->render(
+    $route->getControllerName() . '/' . $route->getMethodName() . '.html', $data);
