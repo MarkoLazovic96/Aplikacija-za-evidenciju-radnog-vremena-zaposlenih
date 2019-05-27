@@ -8,7 +8,7 @@ class Controller {
     final public function __construct(\App\Core\DatabaseConnection &$dbc){
         $this->dbc = $dbc;
     }
-    final public function getDatabaseConnection(): \App\Core\DatabaseConnection {
+    final public function &getDatabaseConnection(): \App\Core\DatabaseConnection {
         return $this->dbc;
     }
 
