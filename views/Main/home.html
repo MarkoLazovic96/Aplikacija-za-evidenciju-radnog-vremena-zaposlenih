@@ -23,10 +23,10 @@ function checkTime(i) {
 <div class="login-page">
     <div class="form">
       <div class="clock" id="clock"></div>   
-        <form acction="/postRecord" methos="POST">  
-          <input type="text" name="broj-id" id="input" autofocus>
-        </form>
-        </div>    
+      <form acction="/" method="POST">  
+          <input type="text" name="account_id" id="input" autofocus required placeholder="Enter Account ID">
+      </form>
+    </div>    
 	<script>
             input.onblur = function() {
             input.focus();

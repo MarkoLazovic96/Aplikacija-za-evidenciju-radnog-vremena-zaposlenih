@@ -1,5 +1,8 @@
 <?php
 return [
-    App\Core\Route::get('|^category/([0-9]+)/delete/?$|','Main', 'home'),
-    App\Core\Route ::any('|^.*$|','Main','home')
+    App\Core\Route ::get( '|^$|'                ,'Main'       ,'home'),
+    App\Core\Route ::post( '|^$|'             ,'Main'     ,'postRecord'),
+    App\Core\Route ::get( '|^admin?$|'          ,'Admin'     ,'getlogin'),
+    App\Core\Route ::post('|^admin?$|'          ,'Admin'     ,'postLogin')
+
 ];

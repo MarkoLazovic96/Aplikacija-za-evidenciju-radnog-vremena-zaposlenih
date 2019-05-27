@@ -25,12 +25,11 @@ $arguments = $route->exstractArguments($url);
 #print_r($route);
 #print_r($arguments);
 
-$fullContollerName = '\\App\\Controllers\\' . $route->getControllerName() . 'Contoller';
-$controller = new App\Controllers\MainController($databaseConnectionata);
+$fullContollerName = '\\App\\Controllers\\' . $route->getControllerName() . 'Controller';
+$controller = new $fullContollerName($databaseConnectionata);
 call_user_func_array([$controller,$route->getMethodName()], $arguments);
 
 $data = $controller->getData();
-
 $loader = new Twig_Loader_Filesystem("./views");
 $twig = new Twig_Environment($loader,[
 "cache" => "./twig-cache",

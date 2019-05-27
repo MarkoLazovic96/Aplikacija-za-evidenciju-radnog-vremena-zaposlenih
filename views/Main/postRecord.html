@@ -1,40 +1,18 @@
 {% extends "_global/index.html" %}
 {% block head %}       
-<script>
-function startTime() {
-  var today = new Date();
-  var h = today.getHours();
-  var m = today.getMinutes();
-  var s = today.getSeconds();
-  m = checkTime(m);
-  s = checkTime(s);
-  document.getElementById('clock').innerHTML =
-  h + ":" + m + ":" + s;
-  var t = setTimeout(startTime, 500);
-}
-function checkTime(i) {
-  if (i < 10) {i = "0" + i};
-  return i;
-}
-</script>
+<meta http-equiv="refresh" content="3;url=http://localhost/" />
 {% endblock %}
 {% block main %}
 {% spaceless %}
 <div class="login-page">
     <div class="form">
-      <div class="clock" id="clock"></div>   
-        <form>  
-          <input type="text" name="broj-id" id="input" autofocus>
-        </form>
-        </div>    
-	<script>
-            input.onblur = function() {
-            input.focus();
-            };
-  </script>
-    <div class="message">
-        <p>{{ message }}</p>
-    </div>
+        <div class="mess">
+            <p> Time: </p>{{ record.creted_at }}
+            <p> Name: </p>{{ record.name }} {{ record.lastname }}
+            <p> Status: </p>{{ record.status }}
+        </div>
+    </div>    
+	
 </div>
 {% endspaceless %}
 {% endblock %}
