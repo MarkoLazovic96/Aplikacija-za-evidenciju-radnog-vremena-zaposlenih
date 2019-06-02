@@ -3,10 +3,17 @@ namespace App\Core;
 
 class Controller {
     private $dbc;
+    private $session;
     private $data = [];
     
     final public function __construct(\App\Core\DatabaseConnection &$dbc){
         $this->dbc = $dbc;
+    }
+    final public function &getSession(): \App\Core\Session\Session {
+        return $this->session;
+    }
+    final public function setSession(\App\Core\Session\Session &$session){
+        $this->session = $session;
     }
     final public function &getDatabaseConnection(): \App\Core\DatabaseConnection {
         return $this->dbc;
@@ -27,5 +34,11 @@ class Controller {
 
     final public function getData(): array{
         return $this->data;
+    }
+
+    final protected function redirect(string $path, int $code = 307){
+        ob_clean();
+        header('Location: ' . $path, true, $code);
+        exit;
     }
 }

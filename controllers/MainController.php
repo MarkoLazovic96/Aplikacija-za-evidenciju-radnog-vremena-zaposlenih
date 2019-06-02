@@ -3,11 +3,13 @@
 namespace App\Controllers;
 class MainController extends \App\Core\Controller {
     public function home() {
-        
-    }
-    public function getLogin(){
+        $staraVrednost = $this->getSession()->get('brojac', 0);
+        $novaVrednost= $staraVrednost + 1;
 
-    } 
+        $this->getSession()->put('brojac', $novaVrednost);
+        $this->set('podatak', $novaVrednost);
+    }
+
     public function postRecord(){
         $accountId = \filter_input(INPUT_POST,'account_id',FILTER_SANITIZE_STRING);
         $accountModel = new \App\Models\AccountModel($this->getDatabaseConnection());
@@ -27,9 +29,9 @@ class MainController extends \App\Core\Controller {
         $record = $recordModel->getReccordByAccountId($accountId);
         $this->set('record', $record);
     }
+    
     public function postLogin(){
-        $username = \filter_input(INPUT_POST,'login_username',FILTER_SANITIZE_STRING);
-        $password = \filter_input(INPUT_POST,'login_password',FILTER_SANITIZE_STRING);
+        
     }
    
 }

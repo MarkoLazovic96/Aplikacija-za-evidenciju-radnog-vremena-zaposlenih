@@ -62,7 +62,7 @@ abstract class Model{
                 throw new \Exception('Invalid field name or value:' . $fieldName);
             }
             $tableName = $this->getTableName();
-            $sql = 'SELECT * FROM' . $tableName . 'WHERE' . $fieldName . ' =?;';
+            $sql = 'SELECT * FROM ' . $tableName . ' WHERE ' . $fieldName . ' =?;';
             print_r($sql);
             $prep = $this->dbc->getConnection()->prepare($sql);
             $res=$prep->execute([$value]);
@@ -78,7 +78,7 @@ abstract class Model{
                 throw new \Exception('Invalid field name or value:' . $fieldName);
             }
             $tableName = $this->getTableName();
-            $sql = 'SELECT * FROM' . $tableName . 'WHERE' . $fieldName . ' =?;';
+            $sql = 'SELECT * FROM ' . $tableName . ' WHERE ' . $fieldName . ' =?;';
             $prep = $this->dbc->getConnection()->prepare($sql);
             $res=$prep->execute([$value]);
             $items =[];
