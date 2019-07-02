@@ -1,5 +1,7 @@
 <?php
 final class Configuration{
+    const BASE = 'http://localhost/';
+
     const DATABASE_HOST = 'localhost';
     const DATABASE_USER = 'root';
     const DATABASE_PASS = '';
@@ -11,5 +13,5 @@ final class Configuration{
 
     const FINGERPRINT_PROVIDER_FACTORY = '\\App\\Core\\Fingerprint\\BasicFingerprintProviderFactory';
     const FINGERPRINT_PROVIDER_METHOD = 'getInstance';
-    const FINGERPRINT_PROVIDER_ARGS = [ '' ];
+    const FINGERPRINT_PROVIDER_ARGS = [ 'SERVER' ];
 }

@@ -43,7 +43,7 @@ class DateTimeValidator implements Validator {
             $pattern .= ' ';
         }
         if($this->isTimeAllowed === true){
-            $pattern .= '[0-9]{4}\-[0-9]{2}\-[0-9]{2}';
+            $pattern .= '[0-9]{2}:[0-9]{2}:[0-9]{2}';
         }
         $pattern .=  '$/';
 

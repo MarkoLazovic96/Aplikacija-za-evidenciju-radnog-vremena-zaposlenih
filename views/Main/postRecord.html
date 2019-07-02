@@ -1,15 +1,16 @@
 {% extends "_global/index.html" %}
 {% block head %}       
-<meta http-equiv="refresh" content="3;url=http://localhost/" />
+<meta http-equiv="refresh" content="5;url=http://localhost/" />
 {% endblock %}
 {% block main %}
 {% spaceless %}
-<div class="login-page">
-    <div class="form">
-        <div class="mess">
-            <p> Time: </p>{{ record.creted_at }}
-            <p> Name: </p>{{ record.name }} {{ record.lastname }}
-            <p> Status: </p>{{ record.status }}
+<div class="p-3 mb-2 bg-primary text-white container">
+    <div class="form font-weight-bold">
+        <div class="mess font-weight-bold display-4">
+            <p>Welcome!</p>
+            <p> Name: {{ record.name }} {{ record.lastname }}</p>
+            <p> Time: {{ record.created_at }}</p>
+            <p> Status: {{ record.status }}</p>
         </div>
     </div>    
 	

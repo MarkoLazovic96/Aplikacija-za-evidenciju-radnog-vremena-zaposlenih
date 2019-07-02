@@ -7,11 +7,12 @@ class MainController extends \App\Core\Controller {
         $novaVrednost= $staraVrednost + 1;
 
         $this->getSession()->put('brojac', $novaVrednost);
-        $this->set('podatak', $novaVrednost);
     }
 
     public function postRecord(){
         $accountId = \filter_input(INPUT_POST,'account_id',FILTER_SANITIZE_STRING);
+
+        
         $accountModel = new \App\Models\AccountModel($this->getDatabaseConnection());
         $account = $accountModel->getById($accountId);
 
@@ -26,12 +27,17 @@ class MainController extends \App\Core\Controller {
             'account_id'=>$accountId
             ]
         );
-        $record = $recordModel->getReccordByAccountId($accountId);
+        $record = $recordModel->getReccordByAccountId($accountId);   
         $this->set('record', $record);
     }
     
     public function postLogin(){
         
+    }
+    public function getLogout() {
+        $this->getSession()->remove('administrator_id');
+        $this->getSession()->save();
+        $this->redirect('/admin/profile/');
     }
    
 }

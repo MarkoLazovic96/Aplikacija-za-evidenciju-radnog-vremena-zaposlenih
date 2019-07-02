@@ -2,6 +2,8 @@
 require_once 'Configuration.php';
 require_once 'vendor/autoload.php';
 
+ob_start();
+
 $databaseConfiguration = new App\Core\DatabaseConfiguration(
     Configuration::DATABASE_HOST,
     Configuration::DATABASE_USER,
@@ -21,12 +23,8 @@ foreach ($routes as $route){
 
 $route = $router->find($httpMethod, $url);
 $arguments = $route->exstractArguments($url);
-print_r($route);
-print_r($arguments);
-
 $fullContollerName = '\\App\\Controllers\\' . $route->getControllerName() . 'Controller';
 $controller = new $fullContollerName($databaseConnectionata);
-
 $fingerprintProviderFactoryClass = Configuration::FINGERPRINT_PROVIDER_FACTORY;
 $fingerprintProviderFactoryMethod = Configuration::FINGERPRINT_PROVIDER_METHOD;
 $fingerprintProviderFactoryArgs = Configuration::FINGERPRINT_PROVIDER_ARGS;
@@ -42,14 +40,24 @@ $session->setFingerprintProvider($fingerprintProvider);
 
 $controller->setSession($session);
 $controller->getSession()->reload();
+$controller->__pre();
 call_user_func_array([$controller,$route->getMethodName()], $arguments);
 $controller->getSession()->save();
 
 $data = $controller->getData();
+if($controller instanceof \App\Core\ApiController){
+    ob_clean();
+    header('Content-type: application/json; charset=utf-8');
+    echo json_encode($data);
+    exit;
+}
+
 $loader = new Twig_Loader_Filesystem("./views");
 $twig = new Twig_Environment($loader,[
 "cache" => "./twig-cache",
 "auto_reload" => true
 ]);
+
+$data['BASE'] = Configuration::BASE;
 echo $twig->render(
     $route->getControllerName() . '/' . $route->getMethodName() . '.html', $data);

@@ -3,13 +3,13 @@ namespace App\Models;
 
 use App\Core\Field;
 use App\Core\Model;
+use App\Validators\NumberValidator;
 
     class AccountModel extends Model {
         protected function getFields(): array {
             return [
-                'account_id' => Field::readonlyInteger(10),
-                'status' => Field::readonlyString(2),
-                'employee_id' => Field::readonlyInteger(10)
+                'account_id' =>         new Field((new NumberValidator())->setIntegerLength(10),false),
+                'employee_id' =>        new Field((new NumberValidator())->setIntegerLength(10),true)
              ];  
         }  
 }

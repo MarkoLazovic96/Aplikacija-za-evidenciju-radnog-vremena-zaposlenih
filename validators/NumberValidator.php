@@ -60,7 +60,6 @@
             }
             
             $pattern .= '$/';
-            print_r($pattern);
             return \boolval(\preg_match($pattern, $value));
         }
     }

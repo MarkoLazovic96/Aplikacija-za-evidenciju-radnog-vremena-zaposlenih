@@ -1,17 +1,6 @@
 <?php
-
-
-
-
-
 namespace App\Core;
-
-
-
-
-
  final class Route
-
 {
 
 private $requestMethod;

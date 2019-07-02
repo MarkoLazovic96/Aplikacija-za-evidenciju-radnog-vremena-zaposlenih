@@ -63,7 +63,6 @@ abstract class Model{
             }
             $tableName = $this->getTableName();
             $sql = 'SELECT * FROM ' . $tableName . ' WHERE ' . $fieldName . ' =?;';
-            print_r($sql);
             $prep = $this->dbc->getConnection()->prepare($sql);
             $res=$prep->execute([$value]);
             $item = NULL;
@@ -122,7 +121,6 @@ abstract class Model{
             $sql = "INSERT INTO {$tableName} ({$sqlFieldNames}) VALUES ({$questionMarks})";
             $prep = $this->dbc->getConnection()->prepare($sql);
             $res = $prep->execute(array_values($data));
-        
             if(!$res) {
                 return false;
             }
@@ -135,16 +133,18 @@ abstract class Model{
             $tableName = $this->getTableName();
 
             $editList = [];
-            $value = [];
+            $values = [];
             foreach($data as $fieldName => $value){
                 $editList[] = "{$fieldName} = ?";
                 $values[] = $value;
             }
             $editString = implode(', ', $editList);
         
+            $values[] = $id;
             $sql = "UPDATE {$tableName} SET {$editString} WHERE {$tableName}_id = ?;";
             $prep = $this->dbc->getConnection()->prepare($sql);
-            return $prep->execute(array_values($data));
+            
+            return $prep->execute($values);
         }
 
         final public function deletetById(int $id){

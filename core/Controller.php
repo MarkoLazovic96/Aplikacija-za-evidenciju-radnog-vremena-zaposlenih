@@ -5,6 +5,10 @@ class Controller {
     private $dbc;
     private $session;
     private $data = [];
+
+    public function __pre() {
+        
+    }
     
     final public function __construct(\App\Core\DatabaseConnection &$dbc){
         $this->dbc = $dbc;
